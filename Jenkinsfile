@@ -1,10 +1,21 @@
 pipeline {
   agent any
   stages {
-    stage('') {
-      steps {
-        sh '''./mvnw package
+    stage('error') {
+      parallel {
+        stage('error') {
+          steps {
+            sh '''./mvnw package
 '''
+          }
+        }
+
+        stage('check pmd') {
+          steps {
+            sh './mvnw pmd:check'
+          }
+        }
+
       }
     }
 

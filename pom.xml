@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic</artifactId>
@@ -29,6 +29,8 @@
     <node.version>v8.11.1</node.version>
     <nohttp-checkstyle.version>0.0.4.RELEASE</nohttp-checkstyle.version>
     <spring-format.version>0.0.27</spring-format.version>
+
+    <pmdVersion>6.38.0</pmdVersion>
 
   </properties>
 
@@ -62,12 +64,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-        <exclusions>
-            <exclusion>
-                <groupId>org.junit.vintage</groupId>
-                <artifactId>junit-vintage-engine</artifactId>
-            </exclusion>
-        </exclusions>
+      <exclusions>
+        <exclusion>
+          <groupId>org.junit.vintage</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Databases - Uses H2 by default -->
@@ -118,6 +120,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>net.sourceforge.pmd</groupId>
+      <artifactId>pmd</artifactId>
+      <version>6.41.0</version>
     </dependency>
   </dependencies>
 
@@ -234,6 +242,34 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.15.0</version>
+        <dependencies>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-core</artifactId>
+            <version>${pmdVersion}</version>
+          </dependency>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-java</artifactId>
+            <version>${pmdVersion}</version>
+          </dependency>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-javascript</artifactId>
+            <version>${pmdVersion}</version>
+          </dependency>
+          <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd-jsp</artifactId>
+            <version>${pmdVersion}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
     </plugins>
   </build>
 
@@ -317,20 +353,22 @@
             <artifactId>libsass-maven-plugin</artifactId>
             <version>0.2.26</version>
             <executions>
-               <execution>
-                  <phase>generate-resources</phase>
-                  <?m2e execute onConfiguration,onIncremental?>
-                  <goals>
-                     <goal>compile</goal>
-                  </goals>
-               </execution>
+              <execution>
+                <phase>generate-resources</phase>
+                <?m2e execute onConfiguration,onIncremental?>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+              </execution>
             </executions>
             <configuration>
-               <inputPath>${basedir}/src/main/scss/</inputPath>
-               <outputPath>${basedir}/src/main/resources/static/resources/css/</outputPath>
-               <includePath>${project.build.directory}/webjars/META-INF/resources/webjars/bootstrap/${webjars-bootstrap.version}/scss/</includePath>
+              <inputPath>${basedir}/src/main/scss/</inputPath>
+              <outputPath>${basedir}/src/main/resources/static/resources/css/</outputPath>
+              <includePath>
+                ${project.build.directory}/webjars/META-INF/resources/webjars/bootstrap/${webjars-bootstrap.version}/scss/
+              </includePath>
             </configuration>
-         </plugin>
+          </plugin>
         </plugins>
       </build>
     </profile>

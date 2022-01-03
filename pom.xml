@@ -125,7 +125,7 @@
     <dependency>
       <groupId>net.sourceforge.pmd</groupId>
       <artifactId>pmd</artifactId>
-      <version>6.41.0</version>
+      <version>6.38.0</version>
     </dependency>
   </dependencies>
 

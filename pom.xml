@@ -30,6 +30,8 @@
     <nohttp-checkstyle.version>0.0.4.RELEASE</nohttp-checkstyle.version>
     <spring-format.version>0.0.27</spring-format.version>
 
+    <pmdVersion>6.38.0</pmdVersion>
+
   </properties>
 
   <dependencies>
@@ -118,11 +120,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>net.sourceforge.pmd</groupId>
-      <artifactId>pmd</artifactId>
     </dependency>
   </dependencies>
 
@@ -361,9 +358,7 @@
             <configuration>
               <inputPath>${basedir}/src/main/scss/</inputPath>
               <outputPath>${basedir}/src/main/resources/static/resources/css/</outputPath>
-              <includePath>
-                ${project.build.directory}/webjars/META-INF/resources/webjars/bootstrap/${webjars-bootstrap.version}/scss/
-              </includePath>
+              <includePath>${project.build.directory}/webjars/META-INF/resources/webjars/bootstrap/${webjars-bootstrap.version}/scss/</includePath>
             </configuration>
           </plugin>
         </plugins>
